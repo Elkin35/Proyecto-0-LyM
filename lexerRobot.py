@@ -6,8 +6,8 @@ import ply.lex as lex
 
 tokens_final = []
 
-reservadas = ['ROBOT_R','END','IF','THEN','WHILE','DO','CALL','CONST',
-		'VAR','PROCEDURE','OUT','IN','ELSE'
+reservadas = ['START','END','IF','THEN','WHILE','DO','CALL','CONST',
+		'VARS','PROCS','OUT','IN','ELSE', 'ROBOT_R', "SOUTH", "O", "NORTH", "WEST", "EAST"
 		]
 
 tokens = reservadas+['ID','NUMBER','PLUS','MINUS','TIMES','DIVIDE',
@@ -46,6 +46,7 @@ t_GT = r'>'
 t_GTE = r'>='
 t_LPARENT = r'\('
 t_RPARENT = r'\)'
+t_START = r'ROBOT_R'
 
 t_RBRACKET = r'\['
 t_LBRACKET = r'\]'
@@ -55,6 +56,14 @@ t_SEMMICOLOM = r';'
 t_COLON = r':'
 t_DOT = r'\.'
 t_UPDATE = r':='
+
+def t_O(t):
+	r'\|[Ss][Oo][Uu][Tt][Hh]|[nN][Oo][Rr][Tt][Hh]|[Ww][Ee][Ss][Tt]|[Ee][Aa][Ss][Tt]|[Ss][Oo][Uu][Tt][Hh]'
+	if t.value.upper() in reservadas:
+		t.value = t.value.upper()
+		#reservadas.get(t.value,'ID')
+		t.type = "O"
+	return t
 
 def t_ID(t):
 	r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -108,11 +117,15 @@ analizador = lex.lex()
 
 analizador.input(cadena)
 
+i = 0
+
 while True:
 	tok = analizador.token()
 	if not tok : break
 	tokens_final.append(tok)
 	print(tok)
+
+
 
 print("\n\n")
 
