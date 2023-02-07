@@ -4,6 +4,8 @@ import os
 import sys
 import ply.lex as lex
 
+tokens_final = []
+
 reservadas = ['ROBOT_R','END','IF','THEN','WHILE','DO','CALL','CONST',
 		'VAR','PROCEDURE','OUT','IN','ELSE'
 		]
@@ -14,26 +16,21 @@ tokens = reservadas+['ID','NUMBER','PLUS','MINUS','TIMES','DIVIDE',
 		'DOT','UPDATE', 'COLON','RBRACKET','LBRACKET'
 		]
 
-
-#tokens = tokens+reservadas
-
-reservadas = {
-	'ROBOT_R':'BEGIN',
-	'end':'END',
-	'if':'IF',
-	'then':'THEN',
-	'while':'WHILE',
-	'do':'DO',
-	'call':'CALL',
-	'const':'CONST',
-	'int':'VAR',
-	'procedure':'PROCEDURE',
-	'out':'OUT',
-	'in':'IN',
-	'else':'ELSE'
-}
-
-#tokens = tokens+list(reservadas.values())
+# reservadas = {
+# 	'ROBOT_R':'BEGIN',
+# 	'end':'END',
+# 	'if':'IF',
+# 	'then':'THEN',
+# 	'while':'WHILE',
+# 	'do':'DO',
+# 	'call':'CALL',
+# 	'const':'CONST',
+# 	'int':'VAR',
+# 	'procedure':'PROCEDURE',
+# 	'out':'OUT',
+# 	'in':'IN',
+# 	'else':'ELSE'
+# }
 
 t_ignore = '\t '
 t_PLUS = r'\+'
@@ -63,7 +60,7 @@ def t_ID(t):
 	r'[a-zA-Z_][a-zA-Z0-9_]*'
 	if t.value.upper() in reservadas:
 		t.value = t.value.upper()
-		reservadas.get(t.value,'ID')
+		#reservadas.get(t.value,'ID')
 		t.type = t.value
 
 
@@ -100,20 +97,9 @@ def buscarFicheros(directorio):
 		print (str(cont)+". "+file)
 		cont = cont+1
 
-	# while respuesta == False:
-	# 	numArchivo = input('\nNumero del test: ')
-	# 	for file in files:
-	# 		if file == files[int(numArchivo)-1]:
-	# 			respuesta = True
-	# 			break
-
-	# print ("Has escogido \"%s\" \n" %files[int(numArchivo)-1])
-
-	# return files[int(numArchivo)-1]
-
 directorio = '/Users/sebas/Documents/Compiladores/pl0/analizador version 1/test/'
 archivo = buscarFicheros(directorio)
-#test = directorio+archivo
+
 fp = codecs.open("read.txt","r","utf-8")
 cadena = fp.read()
 fp.close()
@@ -125,7 +111,11 @@ analizador.input(cadena)
 while True:
 	tok = analizador.token()
 	if not tok : break
+	tokens_final.append(tok)
 	print(tok)
+
+print("\n\n")
+
 
 
 
