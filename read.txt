@@ -10,3 +10,8 @@ while: canMovetoThe: 1 , north do: [moveInDir: 1, north] od
 
 goWest [ |  | if: canMoveInDir: 1, west then: [MoveInDir: 1 ,
 west] else: nop: ]
+
+[
+goTo: 3, 3;
+putCB: 2 ,1 
+]
