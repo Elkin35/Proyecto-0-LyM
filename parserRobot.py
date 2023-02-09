@@ -11,29 +11,29 @@ def p_program(p):
 	print("program")
 
 def p_block(p):
-	'''block : ROBOT_R varDecl procDecl instruction'''
+	'''block : ROBOT_R varDecl procDecl instructions'''
 	print ("block")
 
 def p_instruction(p):
-	'''instruction : RBRACKET inst LBRACKET'''
+	'''instructions : RBRACKET insts LBRACKET'''
 	print ("instruction")
 
 def p_instructionEmpty(p):
-	'''instruction : empty'''
+	'''instructions : empty'''
 	print ("instructionEmpty")
 
 def p_instruction2(p):
-	'''instruction : inst LBRACKET'''
+	'''instructions : insts LBRACKET'''
 	print ("instruction")
 
 def p_instruction3(p):
-	'''instruction : RBRACKET inst SEMMICOLOM'''
+	'''instructions : RBRACKET insts SEMMICOLOM'''
 	print ("instruction")
 
 def p_varDecl(p):
     '''varDecl : VARS nomSeparatelist SEMMICOLOM'''
     print(p[0], p[1], p[2], p[3])
-    print ("varDecl")
+    print ("varDecl1")
 
 def p_varDeclEmpty(p):
     '''varDecl : empty'''
@@ -51,9 +51,21 @@ def p_nomSeparateList3(p):
     '''nomSeparatelist : nomSeparatelist COMMA ID'''
     print("nomSeparateList3")
 
-def p_procDecl (p):
-    '''procDecl : PROCS procDef insts'''
-    print ("procDecl")
+def p_procDecl11 (p):
+    '''procDecl : PROCS procDef LBRACKET new'''
+    print ("procDecl1")
+
+def p_new2 (p):
+    '''new : procDef LBRACKET'''
+    print ("new2")
+
+def p_new3 (p):
+    '''new : LBRACKET'''
+    print ("new3")
+
+def p_procDecl33 (p):
+    '''procDecl : procDef'''
+    print ("procDecl3")
 
 def p_procDecl2 (p):
 	'''again :'''
@@ -72,7 +84,7 @@ def p_procDeclEmpty (p):
     print ("procDeclEmpty")
 
 def p_procDef2 (p):
-    '''procDef : ID RBRACKET param again LBRACKET'''																														
+    '''procDef : ID RBRACKET param again'''																														
     print ("procDef2")
 
 def p_condition (p):
