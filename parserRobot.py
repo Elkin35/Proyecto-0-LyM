@@ -51,24 +51,32 @@ def p_nomSeparateList3(p):
     print ("nomSeparateList3")
 
 def p_procDecl (p):
-    '''procDecl : PROCS procDef inst'''
+    '''procDecl : PROCS again inst'''
     print ("procDecl")
+
+def p_procDecl2 (p):
+	'''again :'''
+	print("again2")
+
+def p_procDecl5 (p):
+	'''again : procDef'''
+	print("again5")
+
+def p_procDecl3 (p):
+	'''again : again SEMMICOLOM'''
+	print("again3")
+
+def p_procDecl4 (p):
+	'''again : SEMMICOLOM again LBRACKET'''
+	print("again4")
 
 def p_procDeclEmpty (p):
     '''procDecl : empty'''
     print ("procDeclEmpty")
 
-def p_procDef (p):
-    '''procDef : ID RBRACKET param insts SEMMICOLOM insts SEMMICOLOM insts LBRACKET'''																														
-    print ("procDef")
-	
-def p_secuence1 (p):
-	'''secuence : insts '''
-	print("secuence1")
-
-def p_secuence (p):
-	'''secuence : SEMMICOLOM insts'''
-	print("secuence0")
+def p_procDef2 (p):
+    '''procDef : ID RBRACKET param insts'''																														
+    print ("procDef2")
 
 def p_condition (p):
     '''condition : NUMBER COMMA location'''
