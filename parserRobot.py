@@ -51,7 +51,7 @@ def p_nomSeparateList3(p):
     print ("nomSeparateList3")
 
 def p_procDecl (p):
-    '''procDecl : PROCS again inst'''
+    '''procDecl : PROCS procDef insts'''
     print ("procDecl")
 
 def p_procDecl2 (p):
@@ -59,23 +59,19 @@ def p_procDecl2 (p):
 	print("again2")
 
 def p_procDecl5 (p):
-	'''again : procDef'''
+	'''again : insts'''
 	print("again5")
 
 def p_procDecl3 (p):
-	'''again : again SEMMICOLOM'''
+	'''again : again SEMMICOLOM insts'''
 	print("again3")
-
-def p_procDecl4 (p):
-	'''again : SEMMICOLOM again LBRACKET'''
-	print("again4")
 
 def p_procDeclEmpty (p):
     '''procDecl : empty'''
     print ("procDeclEmpty")
 
 def p_procDef2 (p):
-    '''procDef : ID RBRACKET param insts'''																														
+    '''procDef : ID RBRACKET param again LBRACKET'''																														
     print ("procDef2")
 
 def p_condition (p):
