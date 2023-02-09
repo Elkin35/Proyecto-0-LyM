@@ -59,14 +59,16 @@ def p_procDeclEmpty (p):
     print ("procDeclEmpty")
 
 def p_procDef (p):
-    '''procDef : ID RBRACKET param insts LBRACKET'''																														
+    '''procDef : ID RBRACKET param insts SEMMICOLOM insts SEMMICOLOM insts LBRACKET'''																														
     print ("procDef")
+	
+def p_secuence1 (p):
+	'''secuence : insts '''
+	print("secuence1")
 
-def p_instI (p):
-	'''insts : insts'''
-
-def p_instI (p):
-	'''insts : insts SEMMICOLOM insts'''
+def p_secuence (p):
+	'''secuence : SEMMICOLOM insts'''
+	print("secuence0")
 
 def p_condition (p):
     '''condition : NUMBER COMMA location'''
@@ -77,7 +79,7 @@ def p_condition2 (p):
     print ("condition->object")
 
 def p_object (p):
-    '''object : ID'''
+    '''object : CHIPS'''
     print ("object")
 
 def p_object2 (p):
@@ -109,12 +111,8 @@ def p_param (p):
 	print ("param")
 
 def p_insts (p):
-	'''insts : inst SEMMICOLOM'''
-	print ("insts")
-
-def p_insts2 (p):
-	'''insts : inst'''
-	print ("insts2")
+	'''insts : inst '''
+	print ("instsr")
 
 def p_inst3 (p):
 	'''inst : command'''
@@ -122,7 +120,7 @@ def p_inst3 (p):
 
 def p_commands (p):
 	'''command : ASSIGNTO COLON NUMBER COMMA ID'''
-	print("command")
+	print("commandA")
 
 def p_commands2 (p):
 	'''command : GOTO COLON NUMBER COMMA NUMBER'''
@@ -205,11 +203,11 @@ def p_inst5 (p):
 	print("inst5")
 
 def p_estcon (p):
-	'''estcon : IF COLON conditions THEN COLON command ELSE COLON command'''
+	'''estcon : IF COLON conditions THEN COLON RBRACKET command LBRACKET ELSE COLON command'''
 	print("estcon")
 
 def p_estcon2 (p):
-	'''estcon : WHILE COLON conditions DO COLON command'''
+	'''estcon : WHILE COLON conditions DO COLON RBRACKET command LBRACKET'''
 	print("estcon2")
 
 def p_conditions (p):
