@@ -32,6 +32,7 @@ def p_instruction3(p):
 
 def p_varDecl(p):
     '''varDecl : VARS nomSeparatelist SEMMICOLOM'''
+    print(p[0], p[1], p[2], p[3])
     print ("varDecl")
 
 def p_varDeclEmpty(p):
@@ -44,11 +45,11 @@ def p_nomSeparateList(p):
 
 def p_nomSeparateList2(p):
     '''nomSeparatelist : ID'''
-    print ("nomSeparateList2")
+    print("nomSeparateList2")
 
 def p_nomSeparateList3(p):
     '''nomSeparatelist : nomSeparatelist COMMA ID'''
-    print ("nomSeparateList3")
+    print("nomSeparateList3")
 
 def p_procDecl (p):
     '''procDecl : PROCS procDef insts'''
@@ -158,6 +159,10 @@ def p_commands6 (p):
 	'''command : PUT COLON object COMMA NUMBER '''	
 	print("command")
 
+def p_commands13 (p):
+	'''command : PUT COLON ID COMMA object'''
+	print("command")
+
 def p_commands7 (p):
 	'''command : PICK COLON object COMMA NUMBER '''
 	print("command")
@@ -165,6 +170,8 @@ def p_commands7 (p):
 def p_commands8 (p):
 	'''command : MOVETOTHE COLON NUMBER COMMA direction2'''
 	print("command")
+
+
 
 def p_directions (p):
 	'''direction2 : FRONT'''
@@ -255,8 +262,9 @@ def p_empty(p):
 	pass
 
 def p_error(p):
-	print ("Error de sintaxis "), p
+	print ("Error de sintaxis ", p)
 	print ("Error en la linea "+str(p.lineno))
+
 
 def buscarFicheros(directorio):
 	ficheros = []
