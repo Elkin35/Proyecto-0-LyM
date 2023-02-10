@@ -47,7 +47,6 @@ t_GT = r'>'
 t_GTE = r'>='
 t_LPARENT = r'\('
 t_RPARENT = r'\)'
-#t_START = r'ROBOT_R'
 
 t_RBRACKET = r'\['
 t_LBRACKET = r'\]'
@@ -64,7 +63,6 @@ def t_ID(t):
 	r'[a-zA-Z_][a-zA-Z0-9_]*'
 	if t.value.upper() in reservadas:
 		t.value = t.value.upper()
-		#reservadas.get(t.value,'ID')
 		t.type = t.value
 	return t
 
@@ -72,11 +70,6 @@ def t_ID(t):
 def t_newline(t):
 	r'\n+'
 	t.lexer.lineno += len(t.value)
-
-# Detecta los comentarios (El lenguaje de robot no tiene comentarios... para la entrega final se puede borrar)
-def t_COMMENT(t):
-	r'\#.*'
-	pass
 
 # Detecta los numeros
 def t_NUMBER(t):
@@ -86,25 +79,7 @@ def t_NUMBER(t):
 
 # Detecta los errores
 def t_error(t):
-	#print ("caracter ilegal '%s'" % t.value[0])
 	t.lexer.skip(1)
-
-def buscarFicheros(directorio):
-	ficheros = []
-	numArchivo = ''
-	respuesta = False
-	cont = 1
-	files = []
-
-	for base, dirs, files in os.walk(directorio):
-		ficheros.append(files)
-
-	for file in files:
-		print (str(cont)+". "+file)
-		cont = cont+1
-
-directorio = '/Users/sebas/Documents/Compiladores/pl0/analizador version 1/test/'
-archivo = buscarFicheros(directorio)
 
 fp = codecs.open("read.txt","r","utf-8")
 cadena = fp.read()
