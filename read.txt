@@ -12,5 +12,8 @@ west] else: nop: ]
 
 [
 goTo: 3, 3;
-putCB: 2 ,1 
+putCBA: 2 ,1;
+assignTo: 3, one;
+if: canMoveInDir: 1, west then: [MoveInDir: 1 ,
+west] else: nop:
 ]

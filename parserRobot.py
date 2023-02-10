@@ -4,14 +4,17 @@ import codecs
 import re
 from lexerRobot import tokens
 from sys import stdin
+import sys
 
+lista_procs = []
 
 def p_program(p):
 	'''program : block'''
 	print("program")
 
 def p_block(p):
-	'''block : ROBOT_R varDecl procDecl instructions'''
+	'''block : ROBOT_R varDecl procDecl instructions bloque'''
+	#print(p[0], p[1], p[2], p[3], p[4])
 	print ("block")
 
 def p_instruction(p):
@@ -24,7 +27,7 @@ def p_instructionEmpty(p):
 
 def p_instruction2(p):
 	'''instructions : insts LBRACKET'''
-	print ("instruction")
+	print ("instruction2")
 
 def p_instruction3(p):
 	'''instructions : RBRACKET insts SEMMICOLOM'''
@@ -32,7 +35,6 @@ def p_instruction3(p):
 
 def p_varDecl(p):
     '''varDecl : VARS nomSeparatelist SEMMICOLOM'''
-    print(p[0], p[1], p[2], p[3])
     print ("varDecl1")
 
 def p_varDeclEmpty(p):
@@ -84,8 +86,9 @@ def p_procDeclEmpty (p):
     print ("procDeclEmpty")
 
 def p_procDef2 (p):
-    '''procDef : ID RBRACKET param again'''																														
-    print ("procDef2")
+	'''procDef : ID RBRACKET param again'''
+	lista_procs.append(p[1])																										
+	print ("procDef2", p[1])
 
 def p_condition (p):
     '''condition : NUMBER COMMA location'''
@@ -223,7 +226,53 @@ def p_inst4 (p):
 
 def p_inst5 (p):
 	'''inst : ID'''
+	lista_procs.append(p[1])
 	print("inst5")
+
+def p_inst6 (p):
+	'''inst : ID RBRACKET param estcon'''
+	lista_procs.append(p[1])
+	print("inst6")
+
+# ----------------------Bloque de procedimientos--------------------------------
+
+def p_bloqueProcs (p):
+	'''bloque : RBRACKET binst LBRACKET'''
+	print("bloqueProcs")
+
+def p_blockInst2 (p):
+	'''binst : insts SEMMICOLOM binst'''
+	print("blockInsts2")
+
+def p_blockInst3 (p):
+	'''binst : insts'''
+	print("blockInsts3")
+
+def p_blockInst4 (p):
+	'''binst : callProc SEMMICOLOM binst'''	
+	print("blockInsts3")
+
+def p_blockInst5 (p):
+	'''binst : callProc'''
+	print("blockInsts3")
+
+def p_callProc (p):
+	'''callProc : ID COLON NUMBER COMMA NUMBER'''
+	print("callProc")
+
+def p_callProc2 (p):
+	'''callProc : ID COLON ID COMMA NUMBER'''
+	print("callProc2")
+
+def p_callProc3 (p):
+	'''callProc : ID COLON ID COMMA ID'''
+	print("callProc3")
+
+def p_callProc4 (p):
+	'''callProc : ID COLON NUMBER COMMA ID'''
+	print("callProc4")
+
+# ------------------------------------------------------
 
 def p_estcon (p):
 	'''estcon : IF COLON conditions THEN COLON RBRACKET command LBRACKET ELSE COLON command'''
