@@ -186,6 +186,13 @@ def p_insts (p):
 	'''insts : inst '''
 	#print ("instsr")
 
+#importante
+def p_inst2 (p):
+	'''inst : ID COLON var COMMA var'''
+#	if p[1].upper() not in lista_procs:
+#		print (f"Error: El procedimiento {p[1]} no existe")
+#		sys.exit()
+
 def p_inst3 (p):
 	'''inst : command'''
 	#print ("insts3")
@@ -197,21 +204,16 @@ def p_commands (p):
 # -------------------------goto--------------------------
 
 def p_goto(p):
-	'''command : GOTO COLON NUMBER COMMA NUMBER'''
+	'''command : GOTO COLON var COMMA var'''
 	#print("command")
 
-def p_goto2(p):
-	'''command : GOTO COLON ID COMMA NUMBER'''
+def p_var1(p):
+	'''var : ID'''
 	#print("command")
 
-def p_goto3(p):
-	'''command : GOTO COLON ID COMMA ID'''
+def p_var2(p):
+	'''var : NUMBER'''
 	#print("command")
-
-def p_goto4(p):
-	'''command : GOTO COLON NUMBER COMMA ID'''
-	#print("command")
-
 # ------------------------------------------------------
 
 def p_move (p):
@@ -250,12 +252,24 @@ def p_commands13 (p):
 	'''command : PUT COLON ID COMMA object'''
 	#print("command")
 
-def p_commands7 (p):
-	'''command : PICK COLON object COMMA NUMBER '''
+def p_commands15 (p):
+	'''command : PUT COLON NUMBER COMMA object'''
+	#print("command")
+
+def p_commands7_1 (p):
+	'''command : PICK COLON NUMBER COMMA object '''
+	#print("command")
+
+def p_commands7_2 (p):
+	'''command : PICK COLON ID COMMA object '''
 	#print("command")
 
 def p_commands8 (p):
 	'''command : MOVETOTHE COLON NUMBER COMMA direction2'''
+	#print("command")
+
+def p_commands8_1 (p):
+	'''command : MOVETOTHE COLON ID COMMA direction2'''
 	#print("command")
 
 def p_directions (p):
@@ -275,15 +289,27 @@ def p_directions4 (p):
 	#print("directions4")
 
 def p_commands9 (p):
-	'''command : MOVEINDIR COLON condition'''
+	'''command : MOVEINDIR COLON NUMBER COMMA location'''
+	#print("commands")
+
+def p_commands9_2 (p):
+	'''command : MOVEINDIR COLON ID COMMA location'''
 	#print("commands")
 
 def p_commands10 (p):
 	'''command : JUMPTOTHE COLON NUMBER COMMA direction2'''
 	#print("commands")
 
+def p_commands10_1 (p):
+	'''command : JUMPTOTHE COLON ID COMMA direction2'''
+	#print("commands")
+
 def p_commands11 (p):
-	'''command : JUMPINDIR COLON condition'''
+	'''command : JUMPINDIR COLON ID COMMA location'''
+	#print("commands")
+
+def p_commands11_1 (p):
+	'''command : JUMPINDIR COLON NUMBER COMMA location'''
 	#print("commands")
 
 def p_commands12 (p):
@@ -357,7 +383,7 @@ def p_callProc4 (p):
 # ------------------------------------------------------
 
 def p_estcon (p):
-	'''estcon : IF COLON conditions THEN COLON RBRACKET command LBRACKET ELSE COLON command'''
+	'''estcon : IF COLON conditions THEN COLON RBRACKET command LBRACKET ELSE COLON RBRACKET command LBRACKET'''
 	#print("estcon")
 
 def p_estcon2 (p):
@@ -369,27 +395,27 @@ def p_conditions (p):
 	#print("conditions")
 
 def p_conditions2 (p):
-	'''conditions : CANPUT COLON condition'''
+	'''conditions : CANPUT COLON var COMMA object'''
 	#print("conditions")
 
 def p_conditions3 (p):
-	'''conditions : CANPICK COLON condition'''
+	'''conditions : CANPICK COLON var COMMA object'''
 	#print("conditions")
 
 def p_conditions4 (p):
-	'''conditions : CANMOVEINDIR COLON condition'''
+	'''conditions : CANMOVEINDIR COLON var COMMA location'''
 	#print("conditions")
 
 def p_conditions5 (p):
-	'''conditions : CANJUMPINDIR COLON condition'''
+	'''conditions : CANJUMPINDIR COLON var COMMA location'''
 	#print("conditions")
 
 def p_conditions6 (p):
-	'''conditions : CANMOVETOTHE COLON NUMBER COMMA direction2'''
+	'''conditions : CANMOVETOTHE COLON var COMMA direction2'''
 	#print("conditions")
 
 def p_conditions7 (p):
-	'''conditions : CANJUMPTOTHE COLON NUMBER COMMA direction2'''
+	'''conditions : CANJUMPTOTHE COLON var COMMA direction2'''
 	#print("conditions")
 
 def p_conditions7 (p):
