@@ -78,9 +78,3 @@ fp.close()
 analizador = lex.lex()
 
 analizador.input(cadena)
-
-# while True:
-# 	tok = analizador.token()
-# 	if not tok : break
-# 	#tokens_final.append(tok)
-# 	print(tok)
