@@ -192,6 +192,9 @@ def p_inst3 (p):
 
 def p_commands (p):
 	'''command : ASSIGNTO COLON NUMBER COMMA ID'''
+	if p[5].upper() not in decl_variables:
+		print("La Variable " + p[5] + " no ha sido declarada")
+		sys.exit()
 	#print("commandA")
 
 # -------------------------goto--------------------------
@@ -202,14 +205,26 @@ def p_goto(p):
 
 def p_goto2(p):
 	'''command : GOTO COLON ID COMMA NUMBER'''
+	if p[3].upper() not in decl_variables:
+		print("La Variable " + p[3] + " no ha sido declarada")
+		sys.exit()
 	#print("command")
 
 def p_goto3(p):
 	'''command : GOTO COLON ID COMMA ID'''
+	if p[3].upper() not in decl_variables:
+		print("La Variable " + p[3] + " no ha sido declarada")
+		sys.exit()
+	elif p[5].upper() not in decl_variables:
+		print("La Variable " + p[5] + " no ha sido declarada")
+		sys.exit()
 	#print("command")
 
 def p_goto4(p):
 	'''command : GOTO COLON NUMBER COMMA ID'''
+	if p[5].upper() not in decl_variables:
+		print("La Variable " + p[5] + " no ha sido declarada")
+		sys.exit()
 	#print("command")
 
 # ------------------------------------------------------
@@ -331,6 +346,7 @@ def p_callProc (p):
 	if p[1].upper() not in lista_procs:
 		print(f"Error: El procedimiento {p[1]} no existe")
 		sys.exit()
+
 	#print("callProc")
 
 def p_callProc2 (p):
@@ -338,6 +354,11 @@ def p_callProc2 (p):
 	if p[1].upper() not in lista_procs:
 		print(f"Error: El procedimiento {p[1]} no existe")
 		sys.exit()
+
+	if p[3].upper() not in decl_variables:
+		print("La Variable " + p[3] + " no ha sido declarada")
+		sys.exit()
+
 	#print("callProc2")
 
 def p_callProc3 (p):
@@ -345,6 +366,14 @@ def p_callProc3 (p):
 	if p[1] not in lista_procs:
 		print(f"Error: El procedimiento {p[1]} no existe")
 		sys.exit()
+
+	if p[3].upper() not in decl_variables:
+		print("La Variable " + p[3] + " no ha sido declarada")
+		sys.exit()
+	elif p[5].upper() not in decl_variables:
+		print("La Variable " + p[5] + " no ha sido declarada")
+		sys.exit()
+
 	#print("callProc3")
 
 def p_callProc4 (p):
@@ -352,6 +381,11 @@ def p_callProc4 (p):
 	if p[1] not in lista_procs:
 		print(f"Error: El procedimiento {p[1]} no existe")
 		sys.exit()
+	
+	if p[5].upper() not in decl_variables:
+		print("La Variable " + p[5] + " no ha sido declarada")
+		sys.exit()
+
 	#print("callProc4")
 
 # ------------------------------------------------------
