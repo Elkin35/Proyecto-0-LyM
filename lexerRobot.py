@@ -27,24 +27,14 @@ reservadas = ['ROBOT_R','END','IF','THEN','WHILE','DO', 'CALL','CONST',
 
 		]
 
-tokens = reservadas+['ID','NUMBER','PLUS','MINUS','TIMES','DIVIDE',
-		'ODD','ASSIGN','NE','LT','LTE','GT','GTE',
-		'LPARENT', 'RPARENT','COMMA','SEMMICOLOM',
-		'DOT','UPDATE', 'COLON','RBRACKET','LBRACKET'
+tokens = reservadas+['ID','NUMBER','ODD','LPARENT', 'RPARENT','COMMA',
+					'SEMMICOLOM','DOT','UPDATE', 'COLON','RBRACKET','LBRACKET'
 		]
 
 t_ignore = '\t '
-t_PLUS = r'\+'
-t_MINUS = r'\-'
-t_TIMES = r'\*'
-t_DIVIDE = r'/'
+
 t_ODD = r'ODD'
-t_ASSIGN = r'='
-t_NE = r'<>'
-t_LT = r'<'
-t_LTE = r'<='
-t_GT = r'>'
-t_GTE = r'>='
+
 t_LPARENT = r'\('
 t_RPARENT = r'\)'
 

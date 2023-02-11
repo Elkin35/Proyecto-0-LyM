@@ -7,6 +7,7 @@ from sys import stdin
 import sys
 
 lista_procs = []
+decl_variables = []
 
 # ----------------------Inicio del programa ------------------------------
 
@@ -63,8 +64,30 @@ def p_instruction3(p):
 	#print ("instruction")
 
 def p_varDecl(p):
-    '''varDecl : VARS nomSeparatelist SEMMICOLOM'''
+    '''varDecl : VARS varSeparatelist SEMMICOLOM'''
     #print ("varDecl1")
+
+def p_varDecl2(p):
+    '''varDecl : VARS varSeparatelist'''
+    #print ("varDecl1")
+
+# ----------------------Lista de declaracion de variables--------------------------------
+
+def p_varSeparateList(p):
+	'''varSeparatelist :'''
+	#print("varSeparateList")
+
+def p_varSeparateList2(p):
+	'''varSeparatelist : ID'''
+	decl_variables.append(p[1].upper())
+	#print("varSeparateList2")
+
+def p_varSeparateList3(p):
+	'''varSeparatelist : varSeparatelist COMMA ID'''
+	decl_variables.append(p[3].upper())
+	#print("varSeparateList3")
+
+# --------------------------------------------------------------------------------------
 
 def p_varDeclEmpty(p):
     '''varDecl : empty'''
@@ -116,7 +139,7 @@ def p_procDeclEmpty (p):
 
 def p_procDef2 (p):
 	'''procDef : ID RBRACKET param again'''
-	lista_procs.append(p[1])																										
+	lista_procs.append(p[1].upper())																										
 	#print ("procDef2", p[1])
 
 def p_condition (p):
@@ -171,12 +194,32 @@ def p_commands (p):
 	'''command : ASSIGNTO COLON NUMBER COMMA ID'''
 	#print("commandA")
 
-def p_commands2 (p):
+# -------------------------goto--------------------------
+
+def p_goto(p):
 	'''command : GOTO COLON NUMBER COMMA NUMBER'''
 	#print("command")
 
-def p_commands3 (p):
+def p_goto2(p):
+	'''command : GOTO COLON ID COMMA NUMBER'''
+	#print("command")
+
+def p_goto3(p):
+	'''command : GOTO COLON ID COMMA ID'''
+	#print("command")
+
+def p_goto4(p):
+	'''command : GOTO COLON NUMBER COMMA ID'''
+	#print("command")
+
+# ------------------------------------------------------
+
+def p_move (p):
 	'''command : MOVE COLON NUMBER'''
+	#print("command")
+
+def p_move2 (p):
+	'''command : MOVE COLON ID'''
 	#print("command")
 
 def p_direction (p):
@@ -253,12 +296,12 @@ def p_inst4 (p):
 
 def p_inst5 (p):
 	'''inst : ID'''
-	lista_procs.append(p[1])
+	lista_procs.append(p[1].upper())
 	#print("inst5")
 
 def p_inst6 (p):
 	'''inst : ID RBRACKET param estcon'''
-	lista_procs.append(p[1])
+	lista_procs.append(p[1].upper())
 	#print("inst6")
 
 # ----------------------Bloque de procedimientos--------------------------------
@@ -285,14 +328,14 @@ def p_blockInst5 (p):
 
 def p_callProc (p):
 	'''callProc : ID COLON NUMBER COMMA NUMBER'''
-	if p[1] not in lista_procs:
+	if p[1].upper() not in lista_procs:
 		print(f"Error: El procedimiento {p[1]} no existe")
 		sys.exit()
 	#print("callProc")
 
 def p_callProc2 (p):
 	'''callProc : ID COLON ID COMMA NUMBER'''
-	if p[1] not in lista_procs:
+	if p[1].upper() not in lista_procs:
 		print(f"Error: El procedimiento {p[1]} no existe")
 		sys.exit()
 	#print("callProc2")
@@ -366,7 +409,7 @@ def p_error(p):
 	print ("Error en la linea "+str(p.lineno)+"\n")
 	sys.exit()
 
-fp = codecs.open("read.txt","r","utf-8")
+fp = codecs.open("read2.txt","r","utf-8")
 cadena = fp.read()
 fp.close()
 
